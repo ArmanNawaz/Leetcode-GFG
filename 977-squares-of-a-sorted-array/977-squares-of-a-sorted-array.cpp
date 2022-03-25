@@ -2,9 +2,9 @@ class Solution {
 public:
     vector<int> sortedSquares(vector<int>& nums) {
         return twoPointer(nums);
-        return bruteforce(nums);
+        // return bruteforce(nums);
     }
-private:
+private:    
     // O(n) Time and O(n) extra space
     vector<int> twoPointer(vector<int>& nums){
         int i = 0, j = nums.size() - 1;
