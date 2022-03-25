@@ -1,22 +1,30 @@
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
-class Solution:
-    def insertIntoBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    TreeNode* insertIntoBST(TreeNode* root, int val) {
+        return insert(root, val);
+    }
+private:
+    TreeNode* insert(TreeNode* root, int val) {
+        if(root == nullptr){
+            return new TreeNode(val);
+        }
         
-        def insert(root, data):
-            if root == None:
-                return TreeNode(data, None, None)
-
-            if data < root.val:
-                root.left = insert(root.left, data)
-            else:
-                root.right = insert(root.right, data)
-            return root
-        
-        return insert(root, val)
-            
-        
+        if(val < root -> val)
+            root -> left = insert(root -> left, val);
+        else
+            root -> right = insert(root -> right, val);
+        return root;
+    }
+    
+};
