@@ -10,28 +10,25 @@
  */
 class Solution {
     ListNode* list;
-    int n;
     
 public:
     Solution(ListNode* head) {
         list = head;
-        
-        n = 0;
-        // Find length of list
-        while(head != nullptr){
-            head = head -> next;
-            ++n;
-        }
     }
     
     int getRandom() {
-        int idx = rand() % n;
         auto head = list;
+        int r = head -> val;
+        int n = 1;
+        head = head -> next;
         
-        while(idx-- > 0) {
+        while(head) {
+            if(rand() % (n + 1) == 0)
+                r = head -> val;
             head = head -> next;
+            ++n;
         }
-        return head -> val;
+        return r;
     }
 };
 
