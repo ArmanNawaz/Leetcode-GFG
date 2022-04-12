@@ -7,21 +7,19 @@ class Solution:
     
     def __init__(self, head: Optional[ListNode]):
         self.list = head
-        n = 0
-        
-        while head:
-            head = head.next;
-            n += 1
-        self.n = n
         
     def getRandom(self) -> int:
-        idx = random.randint(0, self.n - 1)
         head = self.list
+        r = head.val
+        n = 1
+        head = head.next
         
-        while idx > 0:
+        while head != None:
+            if(random.randint(0, n) == 0):
+                r = head.val
             head = head.next
-            idx -= 1
-        return head.val
+            n += 1
+        return r
 
 
 # Your Solution object will be instantiated and called as such:
