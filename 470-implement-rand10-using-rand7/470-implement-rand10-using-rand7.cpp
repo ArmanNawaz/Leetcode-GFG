@@ -5,10 +5,12 @@
 class Solution {
 public:
     int rand10() {
-        return solve();
+        return solve1();
+        // return solve();
     }
 private:
     // Channa Sir
+    // Recursive
     int solve() {
         int num = 7 * (rand7() - 1) + (rand7() - 1);
         
@@ -16,5 +18,15 @@ private:
             return (num % 10) + 1;
         
         return solve();
+    }
+    
+    // Iterative
+    int solve1() {
+        while(true){
+            int num = 7 * (rand7() - 1) + (rand7() - 1);
+
+            if(num < 40)
+                return (num % 10) + 1;
+        }
     }
 };
