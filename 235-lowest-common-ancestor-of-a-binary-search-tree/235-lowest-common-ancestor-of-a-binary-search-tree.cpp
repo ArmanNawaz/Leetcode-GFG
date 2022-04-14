@@ -18,10 +18,10 @@ private:
     TreeNode* solve(TreeNode* root, TreeNode* p, TreeNode* q) {
         if(root == nullptr || root == p || root == q)
             return root;
-        auto left = solve(root -> left, p, q);
-        auto right = solve(root -> right, p, q);
-        if(left == nullptr) return right;
-        if(right == nullptr) return left;
+        if(p -> val < root -> val && q -> val < root -> val)
+            return solve(root -> left, p, q);
+        if(p -> val > root -> val && q -> val > root -> val)
+            return solve(root -> right, p, q);
         return root;
     }
 };
