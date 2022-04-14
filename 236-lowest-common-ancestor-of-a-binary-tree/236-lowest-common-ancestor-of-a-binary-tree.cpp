@@ -10,9 +10,24 @@
 class Solution {
 public:
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        return solve(root, p, q);
+        return channaSir(root, p, q);
+        // return solve(root, p, q);
     }
 private:
+    // Channa Sir
+    TreeNode* channaSir(TreeNode* root, TreeNode* p, TreeNode* q) {
+        if(root == nullptr || root == p || root == q)
+            return root;
+        auto left = channaSir(root -> left, p, q);
+        auto right = channaSir(root -> right, p, q);
+        if(left == nullptr) return right;
+        if(right == nullptr) return left;
+        return root;
+        
+        
+    }
+    
+    
     // Aakash Sir
     TreeNode* solve(TreeNode* root, TreeNode* p, TreeNode* q) {
         if(root == nullptr)
