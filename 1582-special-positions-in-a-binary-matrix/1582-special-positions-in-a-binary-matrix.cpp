@@ -4,6 +4,7 @@ public:
         return bruteForce(mat);
     }
 private:
+    // O(mn * (m + n)) Time and O(1) extra space
     int bruteForce(vector<vector<int>>& mat) {
         int m = mat.size(), n = mat[0].size();
         int result = 0;
