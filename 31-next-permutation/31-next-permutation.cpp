@@ -5,7 +5,7 @@ public:
     }
 private:
     // Channa Sir
-    // O(n logn)
+    // O(n)
     void solve(vector<int>& nums) {
         int n = nums.size();
         int i = n - 2;
