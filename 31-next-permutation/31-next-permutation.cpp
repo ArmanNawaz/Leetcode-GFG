@@ -1,25 +1,28 @@
 class Solution {
-    
 public:
     void nextPermutation(vector<int>& nums) {
-        int threshold = -1, localMaxima;
-        for(int i = nums.size()-1; i > 0 ; i--){
-            if(nums[i] > nums[i-1]){
-                threshold = i-1;
-                break;
-            } 
-        }
-        if(threshold == -1) 
+        return solve(nums);
+    }
+private:
+    // Channa Sir
+    // O(n logn)
+    void solve(vector<int>& nums) {
+        int n = nums.size();
+        int i = n - 2;
+        
+        while(i >= 0 && nums[i] >= nums[i + 1])
+            --i;
+        
+        if(i == -1) {
             reverse(nums.begin(), nums.end());
-        else{
-            for(int i = nums.size() - 1; i >= 0; i--){
-                if(nums[i] > nums[threshold]){
-                    swap(nums[i], nums[threshold]);
-                    break;
-                }
-            }
-            if(threshold < nums.size()-1)
-            reverse(nums.begin() + threshold + 1, nums.end());
+            return;
         }
+        int j = i + 1;
+        
+        while(j < n && nums[j] > nums[i])
+            ++j;
+        --j;
+        swap(nums[i], nums[j]);
+        sort(nums.begin() + i + 1, nums.end());
     }
 };
