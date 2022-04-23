@@ -4,6 +4,9 @@ public:
         return solve(nums1, nums2);
     }
 private:
+    // striver
+    // Binary Search
+    // O(log(min(n1, n2))) Time and O(1) Space
     double solve(vector<int>& nums1, vector<int>& nums2) {
         if(nums2.size() < nums1.size())
             return solve(nums2, nums1);
