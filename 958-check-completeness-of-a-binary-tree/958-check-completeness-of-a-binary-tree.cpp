@@ -12,7 +12,8 @@
 class Solution {
 public:
     bool isCompleteTree(TreeNode* root) {
-        return solve(root);
+        return channaSir(root);
+        // return solve(root);
     }
 private:
     bool solve(TreeNode* root) {
@@ -35,6 +36,30 @@ private:
                     queue.push(currNode -> right);
                 }
             }
+        }
+        return true;
+    }
+    
+    bool channaSir(TreeNode* root) {
+        queue<TreeNode*> queue;
+        queue.push(root);
+        
+        bool flagNonLeaf = true;
+        while(!queue.empty()) {
+            auto currNode = queue.front();
+            queue.pop();
+            
+            if(flagNonLeaf == false && (currNode -> left || currNode -> right)) 
+                return false;
+            if(!currNode -> left && currNode -> right)
+                return false;
+            
+            if((!currNode -> left && !currNode -> right) ||
+              (currNode -> left && !currNode -> right))
+                flagNonLeaf = false;
+            
+            if(currNode -> left) queue.push(currNode -> left);
+            if(currNode -> right) queue.push(currNode -> right);
         }
         return true;
     }
