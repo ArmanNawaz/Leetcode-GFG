@@ -1,47 +1,31 @@
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
-class Solution {
-public:
-    bool findTarget(TreeNode* root, int k) {
-        return bruteForce(root, k);
-    }
-private:
-    
-    // Brute Force Solution
-    // O(n) Time and O(n) extra Space
-    void inorder(TreeNode* root, vector<int>& arr) {
-        if(root == nullptr)
-            return;
-        inorder(root -> left, arr);
-        arr.push_back(root -> val);
-        inorder(root -> right, arr);
-    }
-    
-    bool bruteForce(TreeNode* root, int k) {
-        vector<int> arr;
-        inorder(root, arr);
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def inorder(self, root, arr):
+        if root == None:
+            return
+        self.inorder(root.left, arr)
+        arr.append(root.val)
+        self.inorder(root.right, arr)
         
-        int n = arr.size();
-        int i = 0, j = n - 1;
         
-        while(i < j) {
-            int sum = arr[i] + arr[j];
-            if(sum < k)
-                ++i;
-            else if(sum > k) 
-                --j;
-            else
-                return true;
-        }
-        return false;
-    }
-};
+    def findTarget(self, root: Optional[TreeNode], k: int) -> bool:
+        arr = []
+        self.inorder(root, arr)
+        
+        i, j = 0, len(arr) - 1
+        
+        while i < j:
+            _sum = arr[i] + arr[j]
+            
+            if _sum < k:
+                i += 1
+            elif _sum > k:
+                j -= 1
+            else:
+                return True
+        return False
