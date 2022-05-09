@@ -1,14 +1,20 @@
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-        unordered_map<int, int> visited;
-        visited[nums[0]] = 0;
+        return solve(nums, target);
+    }
+private:
+    vector<int> solve(vector<int>& nums, int target) {
+        unordered_map<int, int> hashMap;
+        int n = nums.size();
         
-        for(int j = 1; j < nums.size(); j++){
-            if(visited.find(target - nums[j]) != visited.end())
-                return {visited[target - nums[j]], j};
-            visited[nums[j]] = j;    
+        for(int i = 0; i < n; ++i) {
+            int req = target - nums[i];
+            if(hashMap.find(req) != hashMap.end())
+                return {hashMap[req], i};
+            
+            hashMap[nums[i]] = i;
         }
-        return {-1, -1};
+        return {};
     }
 };
