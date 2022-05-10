@@ -11,7 +11,7 @@ class Solution:
         targetSum -= root.val
         self.partialAns.append(root.val)
         
-        # if we are at leaf node or the path sum has exceeded the target
+        # if we are at leaf node
         if root.left == None and root.right == None:
             
             # if path sum is equal to targetSum
