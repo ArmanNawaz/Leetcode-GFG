@@ -15,7 +15,7 @@ public:
         return solve(root, targetSum);
     }
 private:
-    void backtrack(TreeNode* root, int targetSum, vector<int>& partialAns, vector<vector<int>>& ans) {
+    void backtrack(TreeNode* root, int& targetSum, vector<int>& partialAns, vector<vector<int>>& ans) {
         if(root == nullptr)
             return;
         
@@ -25,6 +25,8 @@ private:
         if(root -> left == nullptr && root -> right == nullptr) {
             if(targetSum == 0)
                 ans.push_back(partialAns);
+            
+            targetSum += root -> val;
             partialAns.pop_back();
             return;
         }
