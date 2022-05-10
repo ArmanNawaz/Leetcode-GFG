@@ -1,7 +1,8 @@
 class Solution {
 public:
     vector<vector<int>> combinationSum3(int k, int n) {
-        return solve(k, n);
+        return solve2(k, n);
+        // return solve(k, n);
     }
 private:
     // Daily
@@ -23,7 +24,6 @@ private:
         }
     }
     
-    
     vector<vector<int>> solve(int k, int n) {
         vector<vector<int>> ans;
         vector<int> partialAns;
@@ -34,4 +34,43 @@ private:
         
         return ans;
     }
+    
+    
+    
+    // Asim's idea
+    void dfs2(int k, int target, int num, vector<int>& partialAns, vector<vector<int>>& ans) {
+        if(k == 0){
+            if(target == 0) {
+                ans.push_back(partialAns);
+            }
+            return;
+        }
+        if(num > 9)
+            return;
+        
+        dfs2(k, target, num + 1, partialAns, ans);
+        partialAns.push_back(num);
+        dfs2(k - 1, target - num, num + 1, partialAns, ans);
+        partialAns.pop_back();
+        
+        return;
+    }
+    vector<vector<int>> solve2(int k, int n) {
+        vector<vector<int>> ans;
+        vector<int> partialAns;
+        
+        dfs2(k, n, 1, partialAns, ans);
+        
+        return ans;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 };
