@@ -1,7 +1,8 @@
 class Solution {
 public:
     int countVowelStrings(int n) {
-        return recurse(n, 0);
+        return solve(n);
+        // return recurse(n, 0);
     }
 private:
     // Daily
