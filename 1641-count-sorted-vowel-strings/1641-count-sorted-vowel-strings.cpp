@@ -1,31 +1,26 @@
 class Solution {
 public:
     int countVowelStrings(int n) {
-        return solve(n);
+        return recurse(n, 0);
     }
 private:
     // Daily
-    void recurse(int n, int idx, int& count) {
+    int recurse(int n, int idx) {
         
         // if n size string is formed or no more vowel left to include
         if(idx >= 5 || n == 0) {
             if(n == 0)
-                ++count;
-            return;
+                return 1;
+            return 0;
         }
         
+        
         // include current character and move for next set of vowels i.e, "aeiou"
-        recurse(n - 1, idx, count);
+        int inc = recurse(n - 1, idx);
         
         // exclude current character and recurse for next character
-        recurse(n, idx + 1, count);
-    }
-    
-    int solve(int n) {
+        int exc = recurse(n, idx + 1);
         
-        int count = 0;
-        
-        recurse(n, 0, count);
-        return count;
+        return inc + exc;
     }
 };
