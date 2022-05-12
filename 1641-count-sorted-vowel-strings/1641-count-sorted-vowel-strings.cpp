@@ -45,7 +45,7 @@ private:
         // exclude current character and recurse for next character
         int exc = recurse2(n, idx + 1, dp);
         
-        return inc + exc;
+        return dp[n][idx] = inc + exc;
     }
     int solve(int n) {
         vector<vector<int>> dp(n + 1, vector<int>(6, INT_MIN));
