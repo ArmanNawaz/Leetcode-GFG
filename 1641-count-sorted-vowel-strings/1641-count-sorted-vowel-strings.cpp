@@ -40,15 +40,15 @@ private:
         
         
         // include current character and move for next set of vowels i.e, "aeiou"
-        int inc = recurse(n - 1, idx);
+        int inc = recurse2(n - 1, idx, dp);
         
         // exclude current character and recurse for next character
-        int exc = recurse(n, idx + 1);
+        int exc = recurse2(n, idx + 1, dp);
         
         return inc + exc;
     }
     int solve(int n) {
-        vector<vector<int>> dp(n + 1, vector<int>(5, INT_MIN));
+        vector<vector<int>> dp(n + 1, vector<int>(6, INT_MIN));
         
         return recurse2(n, 0, dp);
     }
