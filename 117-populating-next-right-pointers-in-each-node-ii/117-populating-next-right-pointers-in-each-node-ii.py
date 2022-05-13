@@ -22,12 +22,9 @@ class Solution:
             for i in range(levelSize):
                 currNode = queue.popleft()
                 
-                if i == levelSize - 1:
-                    currNode.next = None
-                else:
+                if currNode.left: queue.append(currNode.left)
+                if currNode.right: queue.append(currNode.right)
+                    
+                if i != levelSize - 1:
                     currNode.next = queue[0]
-                
-                if currNode.left != None: queue.append(currNode.left)
-                if currNode.right != None: queue.append(currNode.right)
         return root
-        
