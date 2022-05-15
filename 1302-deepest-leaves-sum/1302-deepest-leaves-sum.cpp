@@ -22,26 +22,21 @@ private:
         
         while(!queue.empty()) {
             int levelSize = queue.size();
-            int nodeVal = 0;
-            bool flag = true;
+            sum = 0;
             
             while(levelSize--) {
                 auto currNode = queue.front();
                 queue.pop();
                 
-                nodeVal += currNode -> val;
+                sum += currNode -> val;
                 if(currNode -> left != nullptr) {
                     queue.push(currNode -> left);
-                    flag = false;
                 }
                 
                 if(currNode -> right != nullptr) {
                     queue.push(currNode -> right);
-                    flag = false;
                 }
             }
-            if(flag)
-                sum += nodeVal;
         }
         return sum;
     }
