@@ -1,7 +1,7 @@
 class Solution {
 public:
     int shortestPathBinaryMatrix(vector<vector<int>>& grid) {
-        return solve(grid);
+        return daily(grid);
     }
 private:
     int solve(vector<vector<int>>& grid){
@@ -76,5 +76,45 @@ private:
             }
         }
         return -1;
+    }
+    
+    int daily(vector<vector<int>>& grid) {
+        int n = grid.size();
+        
+        // base case
+        // if cannot go if either source or dest is already 1
+        if(grid[0][0] == 1 || grid[n - 1][n - 1] == 1)
+            return -1;
+        if(n == 1)
+            return 1;
+        
+        // all possible directions
+        vector<pair<int, int>> dir = {{-1, -1}, {-1, 0}, {-1, 1},
+                                      {0, +1}, {0, -1},
+                                      {1, -1}, {1, 0}, {1, 1}};
+        
+        queue<pair<pair<int, int>, int>> queue;
+        queue.push({{0, 0}, 1});  // {{x, y}, length of path to reach x, y}
+        int minAns = INT_MAX;
+        
+        while(!queue.empty()) {
+            auto curr = queue.front();
+            queue.pop();
+            
+            // iterate for all directions
+            for(int i = 0; i < 8; ++i) {
+                int x = curr.first.first + dir[i].first;
+                int y = curr.first.second + dir[i].second;
+                
+                
+                if(x >= 0 && x < n && y >= 0 && y < n && grid[x][y] == 0) {
+                    grid[x][y] = 1;
+                    if(x == n - 1 && y == n - 1)
+                        minAns = min(minAns, curr.second + 1);
+                    queue.push({{x, y}, curr.second + 1});
+                }
+            }
+        }
+        return minAns == INT_MAX? -1: minAns;
     }
 };
