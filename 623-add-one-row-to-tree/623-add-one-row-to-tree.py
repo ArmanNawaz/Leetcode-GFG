@@ -24,13 +24,8 @@ class Solution:
                 currNode = queue.popleft()
                 
                 if currDepth == depth - 1:
-                    leftNode = TreeNode(val)
-                    rightNode = TreeNode(val)
-                    
-                    if currNode.left:
-                        leftNode.left = currNode.left
-                    if currNode.right:
-                        rightNode.right = currNode.right
+                    leftNode = TreeNode(val, currNode.left, None)
+                    rightNode = TreeNode(val, None, currNode.right)
                     
                     currNode.left = leftNode
                     currNode.right = rightNode
