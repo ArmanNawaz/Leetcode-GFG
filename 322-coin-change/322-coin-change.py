@@ -1,24 +1,27 @@
 class Solution:
-    def recurse(self, coins, idx, amount, dp):
-        if idx >= len(coins) or amount <= 0:
-            if amount == 0:
+    def anant(self, coins, idx, target, summ, dp):
+        
+        if idx >= len(coins) or summ >= target:
+            if summ == target:
                 return 0
             return float('inf')
         
-        if dp[amount][idx] != -1:
-            return dp[amount][idx]
+        if dp[idx][summ] != -1:
+            return dp[idx][summ]
         
-        pick = self.recurse(coins, idx, amount - coins[idx], dp) + 1
-        notPick = self.recurse(coins, idx + 1, amount, dp)
         
-        dp[amount][idx] = min(pick, notPick)
+        summ += coins[idx] 
+        pick = self.anant(coins, idx, target, summ, dp) + 1
+        summ -= coins[idx]
+        notPick = self.anant(coins, idx + 1, target, summ, dp)
         
-        return dp[amount][idx]
+        dp[idx][summ] = min(pick, notPick)
+        return dp[idx][summ]
+        
         
         
     def coinChange(self, coins: List[int], amount: int) -> int:
-        dp = [[-1] * (len(coins) + 1) for _ in range(amount + 1)]
+        dp = [[-1] * (amount + 1) for _ in range(len(coins) + 1)]
+        ans = self.anant(coins, 0, amount, 0, dp)
         
-        ans = self.recurse(coins, 0, amount, dp)
-        
-        return ans if ans < float('inf') else -1
+        return ans if ans != float('inf') else -1
