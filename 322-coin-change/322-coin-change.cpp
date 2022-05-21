@@ -1,35 +1,28 @@
 class Solution {
 public:
     int coinChange(vector<int>& coins, int amount) {
-        int n = coins.size();
-        vector<vector<int>> dp(coins.size()+1, vector<int>(amount+1, -1));
-        
-        int ans = solve(coins, amount, n - 1, dp);
-        
-        if(ans >= INT_MAX - 1)
-            return -1;
-        return ans;
+        return daily(coins, amount);
     }
 private:
-    int solve(vector<int>& coins, int amount, int n, vector<vector<int>>& dp) {
-        if(amount == 0)
-            return 0;
-        
-        if(amount < 0 || n < 0)
+    int recurse(vector<int>& coins, int idx, int amount, vector<vector<int>>& dp) {
+        if(idx >= coins.size() || amount <= 0) {
+            if(amount == 0)
+                return 0;
             return INT_MAX - 1;
+        }
         
-        if(dp[n][amount] != -1)
-            return dp[n][amount];
+        if(dp[amount][idx] != -1)
+            return dp[amount][idx];
         
-        int notPick = solve(coins, amount, n-1, dp);
+        int notPick = recurse(coins, idx + 1, amount, dp);
+        int pick = recurse(coins, idx, amount - coins[idx], dp) + 1;
         
-        int pick = INT_MAX;
-        
-        if(coins[n] <= amount)
-            pick = 1 + solve(coins, amount - coins[n], n, dp);
-        
-        dp[n][amount] = min(pick, notPick);
-        
-        return dp[n][amount];
+        return dp[amount][idx] = min(pick, notPick);
+    }
+    int daily(vector<int>& coins, int amount) {
+        int count = 0;
+        vector<vector<int>> dp(amount + 1, vector<int>(coins.size() + 1, -1));
+        int ans = recurse(coins, 0, amount, dp);
+        return ans != (INT_MAX - 1) ? ans : -1;
     }
 };
