@@ -41,12 +41,8 @@ private:
                 // if the next level is the required depth
                 if(currDepth == depth - 1) {
                     // creating tree nodes
-                    TreeNode* leftNode = new TreeNode(val);
-                    TreeNode* rightNode = new TreeNode(val);
-                    
-                    // preserving the left and right subtree
-                    if(currNode -> left) leftNode -> left = currNode -> left;
-                    if(currNode -> right) rightNode -> right = currNode -> right;
+                    TreeNode* leftNode = new TreeNode(val, currNode -> left, nullptr);
+                    TreeNode* rightNode = new TreeNode(val, nullptr, currNode -> right);
                     
                     // assigning new row to the left and right pointers
                     currNode -> left = leftNode;
