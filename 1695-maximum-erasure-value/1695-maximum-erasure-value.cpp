@@ -5,7 +5,7 @@ public:
     }
 private:
     int daily(vector<int>& nums) {
-        set<int> seen;
+        unordered_set<int> seen;
         int wStart = 0;
         int maxSum = INT_MIN, winSum = 0;
         
