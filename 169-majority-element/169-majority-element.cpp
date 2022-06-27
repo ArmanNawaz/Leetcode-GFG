@@ -48,6 +48,7 @@ private:
     }
     
     
+    // O(n) Time and O(1) extra space
     int moore(vector<int>& nums) {
         int n = nums.size();
         int vote = 1;
