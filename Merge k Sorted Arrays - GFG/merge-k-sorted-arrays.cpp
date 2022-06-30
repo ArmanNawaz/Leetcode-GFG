@@ -61,10 +61,40 @@ class Solution {
         return tmp;
     }
     
+    struct comparator{
+        bool operator()(pair<int, int>& a, pair<int, int>& b) {
+            return a.first > b.first;
+        }
+    };
+    vector<int> usingHeap(vector<vector<int>>& arr, int n) {
+        priority_queue<pair<int, int>, vector<pair<int, int>>, comparator> minHeap;
+        
+        vector<int> arrIndex(n, 0);
+        
+        for(int i = 0; i < n; ++i) {
+            minHeap.push({arr[i][0], i});
+        }
+        
+        vector<int> ans;
+        
+        while(!minHeap.empty()) {
+            auto curr = minHeap.top();
+            minHeap.pop();
+            
+            ans.push_back(curr.first);
+            arrIndex[curr.second]++;
+            if(arrIndex[curr.second] < n)
+                minHeap.push({arr[curr.second][arrIndex[curr.second]], curr.second});
+        }
+        return ans;
+    }
+    
+    
     public:
     //Function to merge k sorted arrays.
     vector<int> mergeKArrays(vector<vector<int>> arr, int K) {
-        return merge(arr, K);
+        return usingHeap(arr, K);
+        // return merge(arr, K);
         // return bruteforce(arr, K);
     }
 };
