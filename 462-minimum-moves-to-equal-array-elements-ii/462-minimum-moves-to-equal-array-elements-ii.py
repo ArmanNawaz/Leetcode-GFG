@@ -4,10 +4,7 @@ class Solution:
         
         nums.sort()
         req = nums[n // 2]
-        
-        if n % 2 == 0:
-            req = (req + nums[n // 2 - 1]) // 2
-        
+                
         ans = 0
         
         for x in nums:
