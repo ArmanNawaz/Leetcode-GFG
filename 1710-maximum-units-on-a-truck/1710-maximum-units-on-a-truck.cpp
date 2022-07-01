@@ -12,17 +12,12 @@ private:
         int ans = 0;
         
         for(int i = 0; i < boxTypes.size(); ++i) {
-            int boxes = boxTypes[i][0];
+            int boxesChoosen = min(boxTypes[i][0], truckSize);
             int units = boxTypes[i][1];
             
-            if(boxes <= truckSize) {
-                ans += boxes * units;
-                truckSize -= boxes;
-            } else {
-                ans += truckSize * units;
-                truckSize = 0;
-                break;
-            }
+            ans += boxesChoosen * units;
+            truckSize -= boxesChoosen;
+            
             if(truckSize == 0) break;
         } 
         
