@@ -30,12 +30,9 @@ int main()
 
 void rotate(int arr[], int n) {
     int last = arr[n - 1];
-    int tmp = arr[0];
-    for(int i = 0; i < n - 1; ++i){
-        int x = arr[i + 1];
-        arr[i + 1] = tmp;
-        tmp = x;
-        
-    }
+    
+    for(int i = n - 2; i >= 0; --i)
+        arr[i + 1] = arr[i];
+    
     arr[0] = last;
 }
