@@ -1,8 +1,10 @@
 class Solution {
 public:
     int longestCommonSubsequence(string text1, string text2) {
-        vector<vector<int>> dp(text1.size(), vector<int>(text2.size(), -1));
-        return recurseDp(text1, text2, 0, 0, dp);
+        return tabDp(text1, text2);
+        
+        // vector<vector<int>> dp(text1.size(), vector<int>(text2.size(), -1));
+        // return recurseDp(text1, text2, 0, 0, dp);
         // return bruteForce(text1, text2, 0, 0);
     }
 private:
@@ -35,7 +37,7 @@ private:
         return dp[i][j] = max(take, notTake);
     }
     
-    int tabDp(string& text1, string& text2, int i, int j) {
+    int tabDp(string& text1, string& text2) {
         vector<vector<int>> dp(text1.size() + 1, vector<int>(text2.size() + 1));
         
         for(int i = 1; i <= text1.size(); ++i) {
