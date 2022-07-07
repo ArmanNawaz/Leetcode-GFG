@@ -24,8 +24,8 @@ private:
         
         if(dp[ind][target] != -1) return dp[ind][target];
         
-        int pick = solve(nums, target - nums[ind], ind + 1, dp);
-        int notPick = solve(nums, target, ind + 1, dp);
+        bool pick = solve(nums, target - nums[ind], ind + 1, dp);
+        bool notPick = solve(nums, target, ind + 1, dp);
         return dp[ind][target] = pick || notPick;
     }
 };
