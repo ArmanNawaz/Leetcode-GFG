@@ -13,7 +13,7 @@ public:
             if(matrix[i][j] >= target) high = mid;
             else low = mid + 1;
         }
-        return (low < m*n && matrix[low/n][low%n] == target);        
+        return (low < m * n && matrix[low / n][low % n] == target);        
 
     }
 };
