@@ -1,7 +1,8 @@
 class Solution {
 public:
     void setZeroes(vector<vector<int>>& matrix) {
-        return optimised(matrix);
+        return rahulSir(matrix);
+        // return optimised(matrix);
         // return bruteForce(matrix);
     }
 private:
@@ -21,7 +22,7 @@ private:
         }
         return;
     }
-    
+    // O(m*n) Time and O(m + n) space
     void optimised(vector<vector<int>>& matrix) {
         int m = matrix.size(), n = matrix[0].size();
         
@@ -48,7 +49,32 @@ private:
                     matrix[i][j] = 0;
             }
         }
-        
         return;
+    }
+    
+    void rahulSir(vector<vector<int>>& matrix) {
+        int col = 0;
+        int m = matrix.size();
+        int n = matrix[0].size();
+        
+        for(int i = 0; i < m; ++i) {
+            if(matrix[i][0] == 0)
+                col = 1;
+            for(int j = 1; j < n; ++j) {
+                if(matrix[i][j] == 0) {
+                    matrix[0][j] = 0;
+                    matrix[i][0] = 0;
+                }
+            }
+        }
+        
+        for(int i = m - 1; i >= 0; --i) {
+            for(int j = n - 1; j > 0; --j) {
+                if(matrix[0][j] == 0 || matrix[i][0] == 0)
+                    matrix[i][j] = 0;
+            }
+            if(col == 1)
+                matrix[i][0] = 0;
+        }
     }
 };
