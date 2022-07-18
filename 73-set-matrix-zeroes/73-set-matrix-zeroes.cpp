@@ -52,6 +52,7 @@ private:
         return;
     }
     
+    // O(m*n) Time and O(1) extra space
     void rahulSir(vector<vector<int>>& matrix) {
         int col = 0;
         int m = matrix.size();
