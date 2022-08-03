@@ -1,18 +1,21 @@
 class Solution {
 public:
     int uniquePaths(int m, int n) {
-        vector<vector<int>> dp(m+1, vector<int>(n+1, -1));
-        return solve(m - 1, n - 1, dp);
+        vector<vector<int>> dp(m + 1, vector<int>(n + 1, -1));
+        return aakashSir(m, n, 0, 0, dp);
     }
 private:
-    int solve(int i, int j, vector<vector<int>>& dp) {
+    int aakashSir(int m, int n, int i, int j, vector<vector<int>>& dp) {
+        if(i >= m && j >= n) return 0;
+        
+        if(i == m - 1 && j == n - 1)
+            return 1;
+        
         if(dp[i][j] != -1) return dp[i][j];
         
-        if(i == 0 && j == 0) return 1;
+        if(i >= m) return dp[i][j] = aakashSir(m, n, i, j + 1, dp);
+        if(j >= n) return dp[i][j] = aakashSir(m, n, i + 1, j, dp);
         
-        if(i == 0) return dp[i][j] = solve(i, j - 1, dp);
-        if(j == 0) return dp[i][j] = solve(i - 1, j, dp);
-        
-        return dp[i][j] = solve(i, j - 1, dp) + solve(i - 1, j, dp);
+        return dp[i][j] = aakashSir(m, n, i, j + 1, dp) + aakashSir(m, n, i + 1, j, dp);
     }
 };
