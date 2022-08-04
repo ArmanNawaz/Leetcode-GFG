@@ -1,7 +1,8 @@
 class Solution {
 public:
     bool isPowerOfTwo(int n) {
-        return solve(n);    
+        return rahulSir(n);
+        // return solve(n);    
     }
 private:
     bool solve(int n) {
@@ -13,5 +14,9 @@ private:
         if(n == 0)
             return true;
         return false;
+    }
+    
+    bool rahulSir(int n) {
+        return (n != 0) && (n != -2147483648) && ((n & -n) == n);
     }
 };
