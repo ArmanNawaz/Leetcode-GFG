@@ -1,16 +1,21 @@
 class Solution:
     def singleNumber(self, nums: List[int]) -> List[int]:
-        # BruteForce
+        # Rahul sir
+        bitmask = 0
         
-        freq = dict()
+        for n in nums:
+            bitmask ^= n
         
-        for x in nums:
-            freq[x] = freq.get(x, 0) + 1
+        diff = bitmask & -bitmask
         
-        ans = []
+        a = 0
         
-        for key, value in freq.items():
-            if value == 1:
-                ans.append(key)
+        for n in nums:
+            if (n & diff) != 0:
+                a ^= n
         
-        return ans
+        b = a ^ bitmask
+        
+        return [a, b]
+        
+        
