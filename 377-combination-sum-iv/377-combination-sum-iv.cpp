@@ -4,7 +4,7 @@ public:
         return solve(nums, target);
     }
 private:
-    int recurse(vector<int>& nums, int idx, int target, vector<int>& dp) {
+    int recurse(vector<int>& nums, int target, vector<int>& dp) {
         // base case
         if(target < 0) return 0;
         if(target == 0) {
@@ -16,21 +16,14 @@ private:
         
         int ans = 0;
         for(int i = 0; i < nums.size(); ++i) {
-            ans += recurse(nums, i, target - nums[i], dp);
+            ans += recurse(nums, target - nums[i], dp);
         }
         return dp[target] = ans;
     }
     
     int solve(vector<int>& nums, int target) {
         vector<int> dp(target + 1, -1);
-        recurse(nums, 0, target, dp);
-        
-//         for(auto x: dp) {
-//             for(auto y: x)
-//                 cout<<y<<" ";
-//             cout<<"\n";
-//         }
-        
+        recurse(nums, target, dp);        
         
         return dp[target];
     }
