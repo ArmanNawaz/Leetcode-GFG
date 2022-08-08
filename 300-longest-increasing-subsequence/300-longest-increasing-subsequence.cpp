@@ -1,21 +1,25 @@
 class Solution {
 public:
     int lengthOfLIS(vector<int>& nums) {
-        vector<vector<int>> dp(nums.size(), vector<int>(nums.size() + 1, -1));
-        return solve(nums, 0, -1, dp);
+        return daily(nums);
     }
 private:
-    int solve(vector<int>& nums, int ind, int prev, vector<vector<int>>& dp) {
-        if(ind >= nums.size())
+    int recurse(vector<int>& nums, int idx, int prev, vector<vector<int>>& dp) {
+        if(idx >= nums.size())
             return 0;
         
-        if(dp[ind][prev + 1] != -1) return dp[ind][prev + 1];
+        if(dp[idx][prev + 1] != -1) return dp[idx][prev + 1];
         
-        int len = solve(nums, ind + 1, prev, dp);    // not-take
+        int len = recurse(nums, idx + 1, prev, dp);
         
-        if(prev == -1 || nums[ind] > nums[prev])
-            len = max(len, 1 + solve(nums, ind + 1, ind, dp));
+        if(prev == -1 || nums[prev] < nums[idx])
+            len = max(len, 1 + recurse(nums, idx + 1, idx, dp));
         
-        return dp[ind][prev + 1] = len;
+        return dp[idx][prev + 1] = len;
+    }
+    
+    int daily(vector<int>& nums) {
+        vector<vector<int>> dp(nums.size(), vector<int>(nums.size(), -1));
+        return recurse(nums, 0, -1, dp);
     }
 };
