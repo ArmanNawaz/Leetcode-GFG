@@ -1,11 +1,10 @@
 class Solution {
 public:
     vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights) {
-        return aakashSir(heights);
+        return rahulSir(heights);
     }
 private:
     void dfs(int row, int col, int prev, vector<vector<bool>>& ocean, vector<vector<int>>& heights) {
-        vector<vector<int>> directions = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
         
         if(row < 0 || row >= heights.size() || col < 0 || col >= heights[0].size())
             return;
@@ -14,17 +13,17 @@ private:
             return;
         
         ocean[row][col] = true;
+        vector<vector<int>> directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
         
-        for(auto dir: directions)
-            dfs(row + dir[0], col + dir[1], heights[row][col], ocean, heights);
-        
+        for(auto dir: directions) {
+            int x = row + dir[0];
+            int y = col + dir[1];
+            dfs(x, y, heights[row][col], ocean, heights);
+        }
         return;
     }
     
-    
-    vector<vector<int>> aakashSir(vector<vector<int>>& heights) {
-        vector<vector<int>> ans;
-        
+    vector<vector<int>> rahulSir(vector<vector<int>>& heights) {
         int rows = heights.size();
         int cols = heights[0].size();
         
@@ -35,10 +34,12 @@ private:
             dfs(0, col, INT_MIN, pacific, heights);
             dfs(rows - 1, col, INT_MIN, atlantic, heights);
         }
+        
         for(int row = 0; row < rows; ++row) {
             dfs(row, 0, INT_MIN, pacific, heights);
             dfs(row, cols - 1, INT_MIN, atlantic, heights);
         }
+        vector<vector<int>> ans;
         
         for(int i = 0; i < rows; ++i) {
             for(int j = 0; j < cols; ++j) {
