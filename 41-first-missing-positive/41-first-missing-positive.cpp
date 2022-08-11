@@ -1,7 +1,8 @@
 class Solution {
 public:
     int firstMissingPositive(vector<int>& nums) {
-        return bruteForce(nums);
+        return solve(nums);
+        // return bruteForce(nums);
     }
 private:
     int bruteForce(vector<int>& nums) {
@@ -19,9 +20,10 @@ private:
         int n = nums.size();
         
         for(int i = 0; i < n; ++i) {
-            if(nums[i] != (i + 1)) {
-                if(nums[i] > 0 and nums[i] < n)
-                    swap(nums[i], nums[nums[i]]);
+            while(nums[i] != (i + 1) && nums[i] > 0 && nums[i] <= n) {
+                if(nums[i] == nums[nums[i] - 1]) break;
+            
+                swap(nums[i], nums[nums[i] - 1]);
             }
         }
         
