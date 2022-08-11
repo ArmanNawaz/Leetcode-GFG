@@ -13,8 +13,6 @@ class Solution {
 public:
     bool isValidBST(TreeNode* root) {
         return bruteForce(root);
-        
-        // return solve(root);
     }
 private:   
     bool bruteForce(TreeNode* root) {
