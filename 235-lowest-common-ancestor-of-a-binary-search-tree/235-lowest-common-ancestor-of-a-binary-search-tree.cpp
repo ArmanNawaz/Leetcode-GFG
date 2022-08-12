@@ -11,17 +11,16 @@
 class Solution {
 public:
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        return solve(root, p, q);
+        return daily(root, p, q);
     }
 private:
-    // Channa Sir
-    TreeNode* solve(TreeNode* root, TreeNode* p, TreeNode* q) {
+    TreeNode* daily(TreeNode* root, TreeNode* p, TreeNode* q) {
         if(root == nullptr || root == p || root == q)
             return root;
         if(p -> val < root -> val && q -> val < root -> val)
-            return solve(root -> left, p, q);
+            return daily(root -> left, p, q);
         if(p -> val > root -> val && q -> val > root -> val)
-            return solve(root -> right, p, q);
+            return daily(root -> right, p, q);
         return root;
     }
 };
