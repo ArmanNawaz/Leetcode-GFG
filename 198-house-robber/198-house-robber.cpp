@@ -1,7 +1,7 @@
 class Solution {
 public:
     int rob(vector<int>& nums) {
-        return rahulSir(nums);
+        return rahulSir2(nums);
         // return solve_tab(nums);
         // vector<int> dp(nums.size(), -1);
         // return solve(nums, 0, dp);
@@ -49,5 +49,18 @@ private:
         }
         
         return nums[n - 1];
+    }
+    
+    // O(n) Time and O(1) extra space
+    int rahulSir2(vector<int>& nums) {
+        int inc = nums[0];
+        int exc = 0;
+        
+        for(int i = 1; i < nums.size(); ++i) {
+            int x = inc;
+            inc = exc + nums[i];
+            exc = max(x, exc);
+        }
+        return max(inc, exc);
     }
 }; 
