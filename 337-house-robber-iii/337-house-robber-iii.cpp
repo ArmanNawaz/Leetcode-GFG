@@ -12,8 +12,10 @@
 class Solution {
 public:
     int rob(TreeNode* root) {
-        unordered_map<TreeNode*, int> dp;
-        return solve(root, dp);
+        // unordered_map<TreeNode*, int> dp;
+        // return solve(root, dp);
+        pair<int, int> res = rahulSir(root);
+        return max(res.first, res.second);
     }
 private:
     int solve(TreeNode* root, unordered_map<TreeNode*, int>& dp) {
@@ -33,5 +35,18 @@ private:
             pick += solve(root -> right -> left, dp) + solve(root -> right -> right, dp);
         
         return dp[root] = max(pick, notPick);
+    }
+    
+    pair<int, int> rahulSir(TreeNode* root) {
+        if(root == nullptr) 
+            return {0, 0};
+        
+        auto left = rahulSir(root -> left);
+        auto right = rahulSir(root -> right);
+        
+        int rob = root -> val + left.second + right.second;
+        int notRob = max(left.first, left.second) + max(right.first, right.second);
+        
+        return {rob, notRob};
     }
 };
