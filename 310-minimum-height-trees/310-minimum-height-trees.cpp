@@ -30,7 +30,6 @@ private:
 
             if(nbrs.size() == 1) q.push(node);
         }
-        vector<int> degree(n, 0);
         
         while(n > 2) {
             
