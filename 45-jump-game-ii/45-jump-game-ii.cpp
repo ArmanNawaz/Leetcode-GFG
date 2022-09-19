@@ -1,22 +1,20 @@
 class Solution {
 public:
     int jump(vector<int>& nums) {
-        return solve(nums);
-    }
-private:
-    int solve(vector<int>& nums) {
         int n = nums.size();
-        int maxJump = 0, currPos = 0, jumps = 0;
-        int i = 0;
+        vector<int> dp(n, INT_MAX);
+        dp[n - 1] = 0;
         
-        while(currPos < n - 1) {
-            maxJump = max(maxJump, i + nums[i]);
-            if(i == currPos) {
-                currPos = maxJump;
-                ++jumps;
+        for(int i = n - 2; i >= 0; --i) {
+            int maxJump = nums[i];
+            
+            for(int j = i + 1; j < n && maxJump-- > 0; ++j) {
+                if(dp[j] != INT_MAX) {
+                    dp[i] = min(dp[j] + 1, dp[i]);
+                    // break;
+                }
             }
-            ++i;
         }
-        return jumps;
+        return dp[0];
     }
 };
