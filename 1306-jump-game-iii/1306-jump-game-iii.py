@@ -1,16 +1,21 @@
 class Solution:
-    
-    def recurse(self, arr, idx):
-        if idx < 0 or idx >= len(arr): return False
-        
-        if arr[idx] < 0: return False
-        if arr[idx] == 0: return True
-        
-        arr[idx] = -arr[idx]
-        
-        return self.recurse(arr, idx - arr[idx]) or self.recurse(arr, idx + arr[idx])
-        
-        
-    
     def canReach(self, arr: List[int], start: int) -> bool:
-        return self.recurse(arr, start)
+        # Rahul Sir - BFS
+        
+        queue = deque()
+        
+        queue.append(start)
+        
+        while len(queue) > 0:
+            idx = queue.popleft()
+            
+            if arr[idx] == 0: return True
+            if arr[idx] < 0: continue
+            
+            if idx + arr[idx] < len(arr): queue.append(idx + arr[idx])
+            if idx - arr[idx] >= 0: queue.append(idx - arr[idx])
+            
+            arr[idx] *= -1
+            
+        return False
+        
