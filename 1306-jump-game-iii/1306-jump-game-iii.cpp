@@ -1,16 +1,25 @@
 class Solution {
 public:
     bool canReach(vector<int>& arr, int start) {
-        return recurse(arr, start);
-    }
-private:
-    bool recurse(vector<int>& arr, int idx) {
-        if(idx < 0 || idx >= arr.size()) return false;
+        // Rahul Sir
+        // bfs
         
-        if(arr[idx] == 0) return true;
-        if(arr[idx] < 0) return false;
-        arr[idx] = -1 * arr[idx];
+        queue<int> q;
+        q.push(start);
         
-        return recurse(arr, idx - arr[idx]) || recurse(arr, arr[idx] + idx);
+        while(!q.empty()) {
+            int idx = q.front();
+            q.pop();
+            
+            if(arr[idx] == 0) return true;
+            
+            if(arr[idx] < 0) continue;
+            
+            if(idx + arr[idx] < (int)arr.size()) q.push(idx + arr[idx]);
+            if(idx - arr[idx] >= 0) q.push(idx - arr[idx]);
+
+            arr[idx] = -1 * arr[idx];
+        }
+        return false;
     }
 };
