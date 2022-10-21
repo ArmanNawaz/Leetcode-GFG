@@ -6,7 +6,7 @@ public:
         int ans = 0;
         int mod = 1e9 + 7;
         
-        if(arr[0] % 2 == 0)
+        if((arr[0] & 1) == 0)
             evenCount = 1;
         else {
             oddCount = 1;
@@ -14,7 +14,7 @@ public:
         }
         
         for(int i = 1; i < n; ++i) {
-            if(arr[i] % 2 == 0) {
+            if((arr[i] & 1) == 0) {
                 evenCount += 1;
             } else {
                 int tmp = oddCount;
