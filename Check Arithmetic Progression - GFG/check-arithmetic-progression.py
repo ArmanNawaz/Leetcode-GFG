@@ -4,8 +4,6 @@
 class Solution:
     
     def checkIsAP(self, arr, n):
-        seen = set(arr)
-        
         first_min, second_min = float('inf'), float('inf')
         
         for num in arr:
@@ -17,11 +15,16 @@ class Solution:
         
         cd = second_min - first_min
         
-        for i in range(n):
-            term = first_min + i * cd
+        for num in arr:
+            num -= first_min
             
-            if term not in seen:
-                return False
+            if cd != 0:
+                if num % cd != 0:
+                    return False
+            else:
+                if num != 0:
+                    return False
+        
         
         return True
         
